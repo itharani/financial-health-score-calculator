@@ -1,0 +1,52 @@
+.results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('/Finance INSIGHTS TEAM.png');
+    background-size: cover;
+    padding: 20px;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .card h2 {
+    margin-bottom: 20px;
+  }
+  
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .card li {
+    margin: 10px 0;
+    text-align: left;
+  }
+
+  .resultspage-buttons {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    justify-content: space-evenly; /* Space out the buttons evenly */
+    align-items: center; /* Center the buttons horizontally */
+    width: 50%; /* Button container takes 50% of the available width */
+    gap: 10px; /* Adds space between buttons */
+    margin-left: auto; /* Center the container */
+    margin-right: auto/* Center the container */
+  }
+
+  .resultspage-buttons button {
+    width: 100%; /* Make each button take up 100% of the container's width */
+    padding: 10px; /* Add padding for better appearance */
+  }

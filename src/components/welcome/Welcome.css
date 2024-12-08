@@ -1,0 +1,62 @@
+/* Reset body and html margin/padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.welcome-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/Finance INSIGHTS TEAM.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .welcome-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .welcome-card h1 {
+    margin-bottom: 20px;
+  }
+  
+  .welcome-card .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .welcome-card .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .welcome-card input, select {
+    width: 100%;  /* Make the input take up the full width of its container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;  /* Ensure padding is included in the width calculation */
+  }
+  
+  .welcome-card .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffbf00;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .welcome-card .btn:hover {
+    background-color: #b36500;
+    color: white
+  }
+  
