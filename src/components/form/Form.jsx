@@ -8,7 +8,13 @@ const Form = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { userData } = location.state; // Extract userData from state
+  let userData = null;
+    if (location.state) {
+      userData = location.state.userData; // Extract userData from state
+    } else {
+      // Redirect to welcome page
+      navigate('/welcome'); 
+    }
 
   const questions = [
     {
