@@ -5,16 +5,16 @@ import './Form.css';
 const Form = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
   let userData = null;
-    if (location.state) {
-      userData = location.state.userData; // Extract userData from state
-    } else {
-      // Redirect to welcome page
-      navigate('/welcome'); 
-    }
+  if (location.state && location.state.userData) {
+    userData = location.state.userData;
+  } else {
+    navigate('/');
+  }
 
   const questions = [
     {
@@ -22,7 +22,6 @@ const Form = () => {
       questions: [
         { id: 'budget', text: 'Do you have a monthly budget?', options: ['Yes', 'No'], weights:[20, 0] },
         { id: 'stickToBudget', text: 'How often do you stick to your budget?', options: ['Rarely', 'Sometimes', 'Always'], weights:[0, 10, 20]},
-
       ],
     },
     {
@@ -43,21 +42,39 @@ const Form = () => {
 
   const handleInputChange = (e, id) => {
     setFormData({ ...formData, [id]: e.target.value });
+    setError(''); // Clearing error message when input changes
   };
 
-  const nextStep = () => setStep(step + 1);
+  const validateStep = () => {
+    const currentQuestions = questions[step - 1].questions;
+    for (let q of currentQuestions) {
+      if (!formData[q.id]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const nextStep = () => {
+    if (validateStep()) {
+      setError('');
+      setStep(step + 1);
+    } else {
+      setError('Please answer all questions.');
+    }
+  };
+
   const prevStep = () => {
     if (step === 1) {
-      navigate('/'); // Go back to the Welcome page
+      navigate('/');
     } else {
-      setStep(step - 1); // Go to the previous step
+      setStep(step - 1);
     }
   };
 
   const handleSubmit = () => {
     let score = 0;
-  
-    // Iterate over all questions to calculate the score
+
     questions.forEach((section) => {
       section.questions.forEach((q) => {
         const answer = formData[q.id];
@@ -67,11 +84,9 @@ const Form = () => {
         }
       });
     });
-  
-   // Pass userData along with formData and score to the Results page
-   navigate('/results', { state: { userData, formData, score } });
+
+    navigate('/results', { state: { userData, formData, score } });
   };
-  
 
   return (
     <div className="form-container">
@@ -90,6 +105,7 @@ const Form = () => {
                     value={option}
                     checked={formData[q.id] === option}
                     onChange={(e) => handleInputChange(e, q.id)}
+                    required
                   />
                   {option}
                 </label>
@@ -97,6 +113,10 @@ const Form = () => {
             </div>
           </div>
         ))}
+        
+        {/* conditional rendering if error exists */}
+        {error && <p className="error">{error}</p>} 
+
         <div className="navigation-buttons">
           {step > 0 && 
           <button onClick={prevStep} className="btn">Back</button>}
