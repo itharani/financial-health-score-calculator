@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Welcome.css";
 
-const Welcome = () => {
-  const [userData, setUserData] = useState({
+const INITIAL_USER_DATA = {
     name: "",
     age: "",
     gender: "",
     email: "",
-  });
+}
+const Welcome = () => {
+  const [userData, setUserData] = useState(INITIAL_USER_DATA);
 
   const navigate = useNavigate();
 
