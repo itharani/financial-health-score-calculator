@@ -7,8 +7,11 @@ const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { formData, score, userData } = location.state || {}; // Extract userData passed from Form
-
   const [emailSent, setEmailSent] = useState(false);
+  
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
   // Determine credit score range and recommendation
   const getRecommendation = (score) => {
@@ -46,8 +49,8 @@ const Results = () => {
     };
 
     emailjs
-      .send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, templateParams, {
-        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      .send(serviceId, templateId, templateParams, {
+        publicKey: publicKey,
       })
       .then(
         (response) => {
