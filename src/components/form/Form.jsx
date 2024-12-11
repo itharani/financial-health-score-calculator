@@ -73,19 +73,23 @@ const Form = () => {
   };
 
   const handleSubmit = () => {
-    let score = 0;
-
-    questions.forEach((section) => {
-      section.questions.forEach((q) => {
-        const answer = formData[q.id];
-        const index = q.options.indexOf(answer);
-        if (index !== -1) {
-          score += q.weights[index];
-        }
+    if(validateStep()) {
+      setError('');
+      let score = 0;
+      questions.forEach((section) => {
+        section.questions.forEach((q) => {
+          const answer = formData[q.id];
+          const index = q.options.indexOf(answer);
+          if (index !== -1) {
+            score += q.weights[index];
+          }
+        });
       });
-    });
 
-    navigate('/results', { state: { userData, formData, score } });
+      navigate('/results', { state: { userData, formData, score } });
+    } else {
+      setError('Please answer all questions.');
+    }
   };
 
   return (
@@ -113,7 +117,7 @@ const Form = () => {
             </div>
           </div>
         ))}
-        
+
         {/* conditional rendering if error exists */}
         {error && <p className="error">{error}</p>} 
 
